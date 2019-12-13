@@ -317,17 +317,6 @@ namespace FinancialWebAPI.Models
             return Database.ExecuteSqlCommand("CalculateTransaction @id",
                 new SqlParameter("id", Id));
         }
-
-        /*/// <summary>
-        /// Delete Group
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public int DeleteGroup(int Id)
-        {
-            return Database.ExecuteSqlCommand("DeleteGroup @id",
-                new SqlParameter("id", Id));
-        }*/
         /// <summary>
         /// Delete Budget
         /// </summary>
@@ -368,6 +357,20 @@ namespace FinancialWebAPI.Models
             return Database.ExecuteSqlCommand("DeleteTransaction @id",
                 new SqlParameter("id", Id));
         }
+
+
+
+        /*/// <summary>
+        /// Delete Group
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public int DeleteGroup(int Id)
+        {
+            return Database.ExecuteSqlCommand("DeleteGroup @id",
+                new SqlParameter("id", Id));
+        }*/
+
 
 
     }
