@@ -39,6 +39,14 @@ namespace FinancialWebAPI.Models
             return Database.ExecuteSqlCommand("AddGroup @Name",
                 new SqlParameter("Name", Name));
         }
+        public int AddAccount(string Name, decimal Balance, AccountType Type, string UserId)
+        {
+            return Database.ExecuteSqlCommand("AddAccount @Name, @Balance, @Type, @UserId",
+                new SqlParameter("Name", Name),
+                new SqlParameter("Balance", Balance),
+                new SqlParameter("Type", Type),
+                new SqlParameter("UserId", UserId));
+        }
         /// <summary>
         /// Create a Budget
         /// </summary>
@@ -77,7 +85,7 @@ namespace FinancialWebAPI.Models
         /// <returns></returns>
         public int AddTransaction(decimal Amount, string Memo, TransactionType Type, string CreatorId, int GroupId, int BudgetId, int BudgetItemId, int BankAccountId)
         {
-            return Database.ExecuteSqlCommand("AddTransaction @Amount, @Type, @CreatorId, @GroupId, @BudgetId, @BudgetItemId, @BankAccountId",
+            return Database.ExecuteSqlCommand("AddTransaction @Amount, @Memo, @Type, @CreatorId, @GroupId, @BudgetId, @BudgetItemId, @BankAccountId",
                 new SqlParameter("Amount", Amount),
                 new SqlParameter("Memo", Memo),
                 new SqlParameter("Type", Type),
@@ -238,6 +246,16 @@ namespace FinancialWebAPI.Models
                 new SqlParameter("id", Id)).FirstOrDefaultAsync();
         }
         /// <summary>
+        /// Get User Id by Email
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <returns></returns>
+        public async Task<User> GetUserByEmail(string Email)
+        {
+            return await Database.SqlQuery<User>("GetUserByEmail @email",
+                new SqlParameter("email", Email)).FirstOrDefaultAsync();
+        }
+        /// <summary>
         /// Edit Group
         /// </summary>
         /// <param name="Id"></param>
@@ -262,14 +280,13 @@ namespace FinancialWebAPI.Models
         /// <param name="Spent"></param>
         /// <param name="Target"></param>
         /// <returns></returns>
-        public int EditBudget(int Id, int GroupId, string Name, decimal Spent, decimal Target)
+        public int EditBudget(int Id, string Name, decimal Spent, decimal Target)
         {
-            return Database.ExecuteSqlCommand("EditBudget @id, @name, @spent, @target, @groupId",
+            return Database.ExecuteSqlCommand("EditBudget @id, @name, @spent, @target",
                 new SqlParameter("id", Id),
                 new SqlParameter("name", Name),
                 new SqlParameter("spent", Spent),
-                new SqlParameter("target", Target),
-                new SqlParameter("groupId", GroupId));
+                new SqlParameter("target", Target));
         }
         /// <summary>
         /// Edit a Budget Item
@@ -280,14 +297,13 @@ namespace FinancialWebAPI.Models
         /// <param name="Spent"></param>
         /// <param name="Target"></param>
         /// <returns></returns>
-        public int EditBudgetItem(int Id, int BudgetId, string Name, decimal Spent, decimal Target)
+        public int EditBudgetItem(int Id, string Name, decimal Spent, decimal Target)
         {
-            return Database.ExecuteSqlCommand("EditBudgetItem @id, @name, @spent, @target, @budgetId",
+            return Database.ExecuteSqlCommand("EditBudgetItem @id, @name, @spent, @target",
                 new SqlParameter("id", Id),
                 new SqlParameter("name", Name),
                 new SqlParameter("spent", Spent),
-                new SqlParameter("target", Target),
-                new SqlParameter("budgetId", BudgetId));
+                new SqlParameter("target", Target));
         }
         /// <summary>
         /// Edit Bank Account
@@ -298,7 +314,7 @@ namespace FinancialWebAPI.Models
         /// <param name="Balance"></param>
         /// <param name="Type"></param>
         /// <returns></returns>
-        public int EditBankAccount(int Id, string UserId, string Name, decimal Balance, TransactionType Type)
+        public int EditBankAccount(int Id, string UserId, string Name, decimal Balance, AccountType Type)
         {
             return Database.ExecuteSqlCommand("EditBankAccount @id, @name, @balance, @type, @userId",
                 new SqlParameter("id", Id),

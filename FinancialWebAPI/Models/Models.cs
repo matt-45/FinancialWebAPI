@@ -10,6 +10,54 @@ using System.Web;
 namespace FinancialWebAPI.Models
 {
     /// <summary>
+    /// User Model
+    /// </summary>
+    public class User
+    {
+        /// <summary>
+        /// User Id
+        /// </summary>
+        public string Id { get; set; }
+        /// <summary>
+        /// First Name
+        /// </summary>
+        public string FirstName { get; set; }
+        /// <summary>
+        /// Last Name
+        /// </summary>
+        public string LastName { get; set; }
+        /// <summary>
+        /// Group Id
+        /// </summary>
+        public int GroupId { get; set; }
+        /// <summary>
+        /// Income Amount
+        /// </summary>
+        public decimal IncomeAmount { get; set; }
+        /// <summary>
+        /// Income Type
+        /// </summary>
+        public IncomeType IncomeType { get; set; }
+        /// <summary>
+        /// Email
+        /// </summary>
+        public string Email { get; set; }
+
+    }
+    /// <summary>
+    /// IncomeType
+    /// </summary>
+    public enum IncomeType
+    {
+        Hourly,
+        Daily,
+        Weekly,
+        BiWeekly,
+        SemiMonthly,
+        Monthly,
+        Annually
+    }
+    /// <summary>
     /// Budget Model
     /// </summary>
     public class Budget

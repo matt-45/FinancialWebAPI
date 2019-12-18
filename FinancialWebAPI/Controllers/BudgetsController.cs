@@ -63,9 +63,9 @@ namespace FinancialWebAPI.Controllers
         /// <param name="Target"></param>
         /// <returns></returns>
         [HttpPut, Route("EditBudget")]
-        public IHttpActionResult EditBudget(int Id, int GroupId, string Name, decimal Spent, decimal Target)
+        public IHttpActionResult EditBudget(int Id, string Name, decimal Spent, decimal Target)
         {
-            return Ok(db.EditBudget(Id, GroupId, Name, Spent, Target));
+            return Ok(db.EditBudget(Id, Name, Spent, Target));
         }
         /// <summary>
         /// Delete Budget

@@ -16,7 +16,11 @@ namespace FinancialWebAPI.Controllers
     [RoutePrefix("api/BankAccounts")]
     public class BankAccountsController : BaseController
     {
-
+        [HttpPost, Route("AddAccount")]
+        public IHttpActionResult AddBudgetItem(string Name, decimal Balance, AccountType Type, string UserId)
+        {
+            return Ok(db.AddAccount(Name, Balance, Type, UserId));
+        }
         /// <summary>
         /// Get All Bank Accounts
         /// </summary>
@@ -59,7 +63,7 @@ namespace FinancialWebAPI.Controllers
         /// <param name="Type"></param>
         /// <returns></returns>
         [HttpPut, Route("EditBankAccount")]
-        public IHttpActionResult EditBankAccount(int Id, string UserId, string Name, decimal Balance, TransactionType Type)
+        public IHttpActionResult EditBankAccount(int Id, string UserId, string Name, decimal Balance, AccountType Type)
         {
             return Ok(db.EditBankAccount(Id, UserId, Name, Balance, Type));
         }
