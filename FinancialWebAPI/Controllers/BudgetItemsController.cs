@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FinancialWebAPI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,6 @@ namespace FinancialWebAPI.Controllers
         {
             return Ok(db.AddBudgetItem(Name, BudgetId));
         }
-        /// <summary>
-        /// Get Budget by Id
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
         /// <summary>
         /// Get All Budget Items
         /// </summary>
@@ -60,14 +56,13 @@ namespace FinancialWebAPI.Controllers
         [Route("GetBudgetItemDetails")]
         public async Task<IHttpActionResult> GetBudgetItemDetails(int Id)
         {
-            var data = await db.GetBankAccountDetails(Id);
+            var data = await db.GetBudgetItemDetails(Id);
             return Json(data, new JsonSerializerSettings { Formatting = Formatting.Indented });
         }
         /// <summary>
         /// Edit Budget Item
         /// </summary>
         /// <param name="Id"></param>
-        /// <param name="BudgetId"></param>
         /// <param name="Name"></param>
         /// <param name="Spent"></param>
         /// <param name="Target"></param>
